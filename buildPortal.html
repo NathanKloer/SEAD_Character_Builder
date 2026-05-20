@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Character Creator Aid</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="character-creator-container">
+      <div class="stage-column">
+        <div class="slot" data-stage="stageOne">
+          <div class="slot-title" id="title1"></div>
+          <select class="stage-selector"></select>
+        </div>
+      </div>
+    <div class="stage-column">
+      <div class="slot" data-stage="stageTwo">
+        <div class="slot-title" id="title2"></div>
+        <select class="stage-selector"></select>
+      </div>
+    </div>
+
+    <div class="stage-column">
+      <div class="slot" data-stage="stageThree">
+        <div class="slot-title" id="title3"></div>
+        <select class="stage-selector"></select>
+      </div>
+    </div>
+
+    <div class="stage-column">
+      <div class="slot" data-stage="stageFour">
+        <div class="slot-title" id="title4"></div>
+        <select class="stage-selector"></select>
+      </div>
+    </div>
+
+    <div class="stage-column">
+      <div class="slot" data-stage="stageFive">
+        <div class="slot-title" id="title5"></div>
+        <select class="stage-selector" multiple></select>
+      </div>
+    </div>
+
+    <div class="stage-column">
+      <div class="slot" data-stage="stageSix">
+        <div class="slot-title" id="title6"></div>
+        <select class="stage-selector" multiple></select>
+      </div>
+    </div>
+
+    <div class="stage-column">
+      <div class="slot" data-stage="stageSeven">
+        <div class="slot-title" id="title7"></div>
+        <select class="stage-selector"></select>
+      </div>
+    </div>
+
+      <div class="stage-column">
+        <div class="slot" data-stage="stageEight">
+          <div class="slot-title" id="title8"></div>
+          <select class="stage-selector"></select>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="stats-display-wrapper">
+        <div class="summary-dashboard">
+
+            <!-- Column 1: Overview, Prerequisites & Flexible XP Pools -->
+<div class="summary-card-panel">
+    <h3 class="summary-section-title">Prereqs & XP</h3>
+    
+    <h4 class="summary-sub-title">Module Prerequisites</h4>
+    <div id="prereq-rows-container" class="stat-rows-container">
+        <div class="no-data-notice">No modules selected yet.</div>
+    </div>
+    
+    <h4 class="summary-sub-title" style="margin-top: 20px;">Available XP Pools</h4>
+    <div id="flex-xp-rows-container" class="stat-rows-container">
+        <!-- These IDs allow JavaScript to update our totals in real time -->
+        <div class="stat-row"><span>Current Character Age:</span><strong id="ledger-char-age">16 Years Old</strong></div>
+        <div class="stat-row"><span>Total Lifepath XP Gained:</span><strong id="ledger-xp-gained">8000 XP</strong></div>
+        <div class="stat-row"><span>Remaining Lifepath XP Balance:</span><strong id="ledger-xp-balance">8000 XP</strong></div>
+        <div class="stat-row"><span>True Flex XP:</span><strong id="pool-True">0 XP</strong></div>
+        <div class="stat-row"><span>Characteristic Flex XP:</span><strong id="pool-Characteristic">0 XP</strong></div>
+        <div class="stat-row"><span>Skill Flex XP:</span><strong id="pool-Skill">0 XP</strong></div>
+        <div class="stat-row"><span>Talent Flex XPl:</span><strong id="pool-Talent">0 XP</strong></div>
+        <div class="stat-row"><span>Perks Flex XP:</span><strong id="pool-Perks">0 XP</strong></div>
+        <div class="card"><h3>Restricted Flexible XP</h3><div id="restricted-xp-container"></div></div>
+    </div>
+</div>
+            
+            <!-- Column 2: Characteristics Card -->
+            <div class="summary-card-panel">
+                <h3 class="summary-section-title">Characteristics</h3>
+                <div class="stat-rows-container">
+                    <div class="stat-row"><span>Strength (Str):</span><strong id="stat-Str">20 (+0 XP)</strong></div>
+                    <div class="stat-row"><span>Toughness (TG):</span><strong id="stat-TG">20 (+0 XP)</strong></div>
+                    <div class="stat-row"><span>Dexterity (Dex):</span><strong id="stat-Dex">20 (+0 XP)</strong></div>
+                    <div class="stat-row"><span>Speed (Spd):</span><strong id="stat-Spd">20 (+0 XP)</strong></div>
+                    <div class="stat-row"><span>Perception (Per):</span><strong id="stat-Per">20 (+0 XP)</strong></div>
+                    <div class="stat-row"><span>Intelligence (Int):</span><strong id="stat-Int">20 (+0 XP)</strong></div>
+                    <div class="stat-row"><span>Willpower (WP):</span><strong id="stat-WP">20 (+0 XP)</strong></div>
+                    <div class="stat-row"><span>Charisma (Cha):</span><strong id="stat-Cha">20 (+0 XP)</strong></div>
+                    <div class="stat-row"><span>Luck (LK):</span><strong id="stat-LK">20 (+0 XP)</strong></div>
+                </div>
+            </div>
+    
+            <!-- Column 2: Skills Card -->
+            <div class="summary-card-panel">
+                <h3 class="summary-section-title">Acquired Skills</h3>
+                <div id="skills-rows-container" class="stat-rows-container">
+                    <div class="no-skills-notice">No skills acquired yet.</div>
+                </div>
+            </div>
+    
+            <!-- Column 3: Talents Card (New) -->
+            <div class="summary-card-panel">
+                <h3 class="summary-section-title">Acquired Talents</h3>
+                <div id="talents-rows-container" class="stat-rows-container">
+                    <!-- JavaScript handles talent row updates and point allocations here -->
+                    <div class="no-talents-notice">No talents acquired yet.</div>
+                </div>
+            </div>
+            <!-- Column 4: Miscellaneous Card -->
+<div class="summary-card-panel">
+    <h3 class="summary-section-title">Miscellaneous</h3>
+
+    <div id="misc-rows-container" class="stat-rows-container">
+        <div class="no-data-notice">No miscellaneous data yet.</div>
+    </div>
+</div>
+    
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,604 @@
+/* ==========================================================================
+   1. GLOBAL LAYOUT
+   ========================================================================== */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f1f5f9;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+.character-creator-container {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.character-creator-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.character-creator-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+.character-creator-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ==========================================================================
+   2. STAGE COLUMNS + SLOT CARDS
+   ========================================================================== */
+
+.stage-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  flex: 0 0 340px;
+  width: 340px;
+
+  align-self: flex-start;
+}
+
+.slot {
+  width: 100%;
+  min-height: 160px;
+
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.08),
+    0 2px 4px -1px rgba(0, 0, 0, 0.04);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.slot:hover {
+  transform: translateY(-2px);
+
+  border-color: #cbd5e1;
+
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.08),
+    0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+/* Stage 5 + 6 unified behavior */
+.slot[data-stage="stageFive"],
+.slot[data-stage="stageSix"] {
+  min-height: 500px;
+  height: auto;
+}
+
+/* ==========================================================================
+   3. TITLES
+   ========================================================================== */
+
+.slot-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   4. SELECTORS + INPUTS
+   ========================================================================== */
+
+.stage-selector,
+.field-selector,
+.dynamic-selector,
+.custom-skill-input {
+  width: 100%;
+  min-height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+
+  background: #f8fafc;
+  color: #334155;
+
+  font-size: 0.95rem;
+
+  box-sizing: border-box;
+  outline: none;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.stage-selector:focus,
+.field-selector:focus,
+.dynamic-selector:focus,
+.custom-skill-input:focus {
+  border-color: #2563eb;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.field-skill-row {
+  border-left: 4px solid #3b82f6;
+  padding-left: 10px;
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.field-skill-tag {
+  font-size: 0.72rem;
+  color: #60a5fa;
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.skill-main {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Multi-select support */
+.stage-selector[multiple] {
+  height: 140px;
+  padding: 8px;
+}
+
+.stage-selector[multiple] option {
+  padding: 8px 10px;
+  margin-bottom: 4px;
+  border-radius: 6px;
+}
+
+.stage-selector[multiple] option:checked {
+  background: #2563eb !important;
+  color: #fff;
+}
+
+/* ==========================================================================
+   5. MODULE CHIPS + MODULE CARDS
+   ========================================================================== */
+
+.selected-module-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selected-module-chip {
+  padding: 5px 10px;
+
+  background: #1e293b;
+  color: white;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.selected-module-card {
+  background: white;
+
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  margin-top: 12px;
+}
+
+.selected-module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 12px;
+
+  background: #f3f4f6;
+
+  font-weight: 700;
+}
+
+.selected-module-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  padding: 14px;
+}
+
+.remove-module-button {
+  width: 24px;
+  height: 24px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #dc2626;
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 14px;
+  line-height: 1;
+
+  transition: background 0.15s ease;
+}
+
+.remove-module-button:hover {
+  background: #b91c1c;
+}
+
+.clear-stage-button {
+  padding: 8px 12px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  background: white;
+
+  cursor: pointer;
+
+  transition: background 0.15s ease;
+}
+
+.clear-stage-button:hover {
+  background: #f3f4f6;
+}
+
+/* ==========================================================================
+   6. DYNAMIC BLOCKS
+   ========================================================================== */
+
+.dynamic-block,
+.field-dropdown-container,
+.field-tier-wrapper,
+.language-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dynamic-block label,
+.field-tier-label,
+.custom-skill-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.dynamic-ui-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field-selection-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  margin-top: 10px;
+  padding-top: 10px;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+.field-duration-display {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   7. SPECIAL CARD STATES
+   ========================================================================== */
+
+.slot.sub-faction-slot {
+  border: 2px dashed #6366f1;
+  background: #f8fafc;
+}
+
+.slot.choice-slot {
+  border: 2px dashed #10b981;
+  background: #f0fdf4;
+}
+
+.slot.custom-skill-slot {
+  border: 2px dashed #f59e0b;
+  background: #fffbeb;
+}
+
+/* ==========================================================================
+   8. SKIP RULES
+   ========================================================================== */
+
+.skip-route-toggle-container,
+.skip-rules-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 12px;
+
+  border: 1px dashed #c084fc;
+  border-radius: 10px;
+
+  background: #f5f3ff;
+}
+
+.skip-route-checkbox {
+  width: 16px;
+  height: 16px;
+
+  accent-color: #9333ea;
+}
+
+/* ==========================================================================
+   9. SUMMARY DASHBOARD
+   ========================================================================== */
+
+.stats-display-wrapper {
+  display: flex;
+  justify-content: center;
+
+  padding: 30px 24px;
+
+  background: #f1f5f9;
+}
+
+.summary-dashboard {
+  width: 100%;
+  max-width: 1450px;
+
+  display: flex;
+  gap: 20px;
+
+  box-sizing: border-box;
+}
+
+.summary-card-panel {
+  flex: 1;
+  min-width: 250px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  padding: 24px;
+
+  background: white;
+
+  border: 2px solid #2563eb;
+  border-radius: 16px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+.summary-section-title {
+  margin: 0;
+  padding-bottom: 12px;
+
+  border-bottom: 2px solid #e2e8f0;
+
+  text-align: center;
+
+  font-size: 1.1rem;
+  font-weight: 800;
+
+  color: #1e293b;
+}
+
+.summary-sub-title {
+  margin: 8px 0 4px;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  color: #475569;
+
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.restricted-xp-row {
+  border: 1px solid #3b82f6;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.restricted-xp-header {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.restricted-xp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-rows-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 8px 12px;
+
+  background: #f8fafc;
+
+  border: 1px solid #f1f5f9;
+  border-radius: 8px;
+
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.stat-row strong {
+  color: #2563eb;
+  white-space: nowrap;
+}
+
+.stat-row.text-block-row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.stat-row.text-block-row span {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.stat-row.text-block-row div {
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.no-skills-notice,
+.no-talents-notice,
+.no-data-notice {
+  padding: 16px 0;
+
+  text-align: center;
+
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   MISCELLANEOUS CARD
+   ========================================================================== */
+
+#misc-rows-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.misc-row {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  padding: 10px 12px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.misc-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+
+  color: #64748b;
+}
+
+.misc-value {
+  font-size: 0.92rem;
+  line-height: 1.45;
+
+  color: #0f172a;
+
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ==========================================================================
+   10. ANIMATIONS
+   ========================================================================== */
+
+@keyframes slideDownSubCard {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   11. RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+  .summary-dashboard {
+    flex-wrap: wrap;
+  }
+
+  .summary-card-panel {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 650px) {
+  .summary-dashboard {
+    flex-direction: column;
+  }
+
+  .summary-card-panel {
+    flex: 1 1 100%;
+  }
+}
